@@ -37,9 +37,10 @@
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <EditText
+            <AutoCompleteTextView
                     android:id="@+id/et_food"
                     android:layout_width="wrap_content"
+                    android:completionThreshold="2"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:imeOptions="actionSearch"

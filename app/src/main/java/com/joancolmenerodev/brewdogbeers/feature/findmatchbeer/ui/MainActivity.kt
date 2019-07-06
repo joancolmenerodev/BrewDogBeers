@@ -11,24 +11,27 @@ import com.joancolmenerodev.brewdogbeers.base.persistence.BrewDatabase
 import com.joancolmenerodev.brewdogbeers.base.persistence.BrewSearched
 import com.joancolmenerodev.brewdogbeers.base.responses.Beer
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter.BeerMatchContract
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
 
 class MainActivity : AppCompatActivity(), BeerMatchContract.View , KodeinAware{
+
    override val kodein by kodein()
     private val presenter: BeerMatchContract.Presenter by instance()
+    private val database : BrewDatabase by instance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_icon as Toolbar)
+
+        Thread.sleep(4000)
+        database.brewDao().insertUser(BrewSearched("Mierda"))
 
     }
 
@@ -40,9 +43,19 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View , KodeinAware{
         System.out.println("No beers found")
     }
 
+    override fun showError(errorMessage: String?) {
+        System.out.println(errorMessage)
+    }
+
     override fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    override fun updateAutoCompleteEditText(brewSearchedList: List<String>) {
+        val adapter = ArrayAdapter(this, android.R.layout.select_dialog_item, brewSearchedList)
+        System.out.println("EOEOEOEO")
+        et_food.setAdapter(adapter)
     }
 
     override fun showProgressBar(b: Boolean) {
@@ -51,7 +64,7 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View , KodeinAware{
     override fun onResume() {
         super.onResume()
         presenter.attachView(this)
-        presenter.findBeerMatchers("Spicy")
+        presenter.initializeAutoCompleteEditText()
     }
 
     override fun onDestroy() {
