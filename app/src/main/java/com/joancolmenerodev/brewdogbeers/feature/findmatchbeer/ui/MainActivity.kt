@@ -2,12 +2,18 @@ package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import com.joancolmenerodev.brewdogbeers.R
+import com.joancolmenerodev.brewdogbeers.base.persistence.BrewDatabase
+import com.joancolmenerodev.brewdogbeers.base.persistence.BrewSearched
 import com.joancolmenerodev.brewdogbeers.base.responses.Beer
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter.BeerMatchContract
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -17,6 +23,7 @@ import org.kodein.di.generic.instance
 class MainActivity : AppCompatActivity(), BeerMatchContract.View , KodeinAware{
    override val kodein by kodein()
     private val presenter: BeerMatchContract.Presenter by instance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
