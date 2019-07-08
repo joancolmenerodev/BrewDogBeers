@@ -16,6 +16,7 @@ val dataBaseModule = Kodein.Module("databaseModule") {
             "sample_db"
         )
             .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
             .build()
     }
 

@@ -35,7 +35,7 @@ class BeerMatchPresenterImpl(private val getMatchBeersUseCase: GetMatchBeersUseC
                     view?.showProgressBar(false)
                     view?.showError(error.localizedMessage)
                 })
-        compositeDisposable.add(disposable)
+        compositeDisposable.add(disposable!!)
     }
 
     override fun onBeerClicked(beer: Beer) {

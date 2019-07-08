@@ -5,10 +5,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "brewsearched")
-data class BrewSearched (
+@Entity(tableName = "brew_food")
+data class BrewFood (
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "food")
-    val food: String
+    @ColumnInfo(name = "name")
+    val name: String
 )

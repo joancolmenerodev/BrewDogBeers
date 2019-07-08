@@ -7,8 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import com.joancolmenerodev.brewdogbeers.R
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewDatabase
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewSearched
+import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.responses.Beer
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter.BeerMatchContract
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View , KodeinAware{
 
    override val kodein by kodein()
     private val presenter: BeerMatchContract.Presenter by instance()
-    private val database : BrewDatabase by instance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +28,15 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View , KodeinAware{
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_icon as Toolbar)
 
-        Thread.sleep(4000)
-        database.brewDao().insertUser(BrewSearched("Mierda"))
+        iv_search.setOnClickListener {
+            presenter.findBeerMatchers(et_food.text.toString())
+        }
+
+
 
     }
 
-    override fun showBeerList(beersList: List<Beer>) {
+    override fun showBeerList(beersList: List<BrewBeer>) {
         System.out.println("Beers size is ${beersList.size}")
     }
 
@@ -54,7 +55,6 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View , KodeinAware{
 
     override fun updateAutoCompleteEditText(brewSearchedList: List<String>) {
         val adapter = ArrayAdapter(this, android.R.layout.select_dialog_item, brewSearchedList)
-        System.out.println("EOEOEOEO")
         et_food.setAdapter(adapter)
     }
 

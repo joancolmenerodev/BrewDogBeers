@@ -1,5 +1,6 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter
 
+import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.responses.Beer
 import com.joancolmenerodev.brewdogbeers.base.ui.BasePresenter
 import com.joancolmenerodev.brewdogbeers.base.ui.BaseView
@@ -7,7 +8,7 @@ import com.joancolmenerodev.brewdogbeers.base.ui.BaseView
 interface BeerMatchContract {
 
     interface View : BaseView {
-        fun showBeerList(beersList: List<Beer>)
+        fun showBeerList(beersList: List<BrewBeer>)
         fun showNoBeersFound()
         fun hideKeyboard()
         fun showProgressBar(b: Boolean)

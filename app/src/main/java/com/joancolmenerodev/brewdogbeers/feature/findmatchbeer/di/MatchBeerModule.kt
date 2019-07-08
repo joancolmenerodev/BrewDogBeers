@@ -12,8 +12,7 @@ import org.kodein.di.generic.singleton
 
 val matchBeerModule = Kodein.Module("MatchBeerModule"){
 
-    bind<MatchBeerRepository>() with singleton { MatchBeerRepository(instance()) }
-
+    bind<MatchBeerRepository>() with singleton { MatchBeerRepository(instance(),instance()) }
     bind<BeerMatchContract.Presenter>() with singleton { BeerMatchPresenterImpl(instance(), instance()) }
     bind<GetMatchBeersUseCase>() with singleton { GetMatchBeersUseCase(instance()) }
     bind<GetUserSearchFromLocalUseCase>() with singleton { GetUserSearchFromLocalUseCase(instance()) }

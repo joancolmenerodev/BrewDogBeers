@@ -1,7 +1,7 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.model
 
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewSearched
+import com.joancolmenerodev.brewdogbeers.base.persistence.BrewFood
 
-fun userSearchMapper(userSearchList: List<BrewSearched>): List<String> {
-    return userSearchList.map { list -> list.food }
+fun userSearchMapper(userSearchList: List<BrewFood>): List<String> {
+    return userSearchList.map { list -> list.name.replace("_"," ") }
 }
