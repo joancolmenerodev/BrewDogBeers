@@ -1,14 +1,15 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter
 
-import com.joancolmenerodev.brewdogbeers.base.responses.Beer
 import com.joancolmenerodev.brewdogbeers.base.ui.AbstractPresenter
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetMatchBeersUseCase
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetUserSearchFromLocalUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class BeerMatchPresenterImpl(private val getMatchBeersUseCase: GetMatchBeersUseCase,
-                             private val getUserSearchFromLocalUseCase: GetUserSearchFromLocalUseCase) :
+class BeerMatchPresenterImpl(
+    private val getMatchBeersUseCase: GetMatchBeersUseCase,
+    private val getUserSearchFromLocalUseCase: GetUserSearchFromLocalUseCase
+) :
     AbstractPresenter<BeerMatchContract.View>(), BeerMatchContract.Presenter {
 
 
@@ -39,7 +40,7 @@ class BeerMatchPresenterImpl(private val getMatchBeersUseCase: GetMatchBeersUseC
         compositeDisposable.add(disposable!!)
     }
 
-    override fun onBeerClicked(beer: Beer) {
+    override fun onBeerClicked(beer: Int) {
     }
 
     override fun initializeAutoCompleteEditText() {

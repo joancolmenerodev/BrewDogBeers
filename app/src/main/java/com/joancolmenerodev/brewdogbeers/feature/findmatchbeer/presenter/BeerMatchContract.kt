@@ -1,7 +1,6 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter
 
 import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
-import com.joancolmenerodev.brewdogbeers.base.responses.Beer
 import com.joancolmenerodev.brewdogbeers.base.ui.BasePresenter
 import com.joancolmenerodev.brewdogbeers.base.ui.BaseView
 
@@ -19,6 +18,6 @@ interface BeerMatchContract {
     interface Presenter : BasePresenter<View> {
         fun findBeerMatchers(food: String)
         fun initializeAutoCompleteEditText()
-        fun onBeerClicked(beer: Beer)
+        fun onBeerClicked(beer: Int)
     }
 }
