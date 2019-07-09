@@ -24,6 +24,7 @@ class BeerMatchPresenterImpl(private val getMatchBeersUseCase: GetMatchBeersUseC
             .subscribe(
                 { result ->
                     view?.showProgressBar(false)
+                    System.out.println(result)
                     if (result.isEmpty()) {
                         view?.showNoBeersFound()
                     } else {

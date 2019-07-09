@@ -11,8 +11,8 @@ import io.reactivex.Maybe
 @Dao
 interface BrewFoodDao {
 
-    @Query("SELECT * FROM brew_food WHERE name = :id")
-    fun getFoodById(id: String): Maybe<BrewFood>
+    @Query("SELECT * FROM brew_food WHERE name = :food")
+    fun getBrewFoodByFood(food: String): Maybe<BrewFood>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBrewSearch(food: BrewFood) : Completable

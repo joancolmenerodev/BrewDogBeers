@@ -2,6 +2,7 @@ package com.joancolmenerodev.brewdogbeers.base.persistence
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
+import androidx.room.ColumnInfo.NOCASE
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,6 +10,6 @@ import androidx.room.PrimaryKey
 data class BrewFood (
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "name", collate = NOCASE)
     val name: String
 )

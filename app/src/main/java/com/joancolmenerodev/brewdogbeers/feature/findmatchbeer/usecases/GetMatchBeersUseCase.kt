@@ -1,5 +1,6 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases
 
+import android.util.Log
 import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.persistence.BrewFood
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.repository.MatchBeerRepository
@@ -11,25 +12,17 @@ class GetMatchBeersUseCase(
 ) {
 
     fun execute(food: String): Maybe<List<BrewBeer>> {
+        val fk_id = -1
 
         return matchBeerRepository.findWordsLocally(food).flatMap {
+            Log.d("UseCase", "I found ${it.name} in db")
             matchBeerRepository.getBeersByFoodLocally(food)
-        }.switchIfEmpty(
-            matchBeerRepository.getMatchBeer(food)
-                .flatMapMaybe { beerList ->
-                    val brewBeers = beerList.map { beer ->
-                        BrewBeer(
-                            beer.id,
-                            beer.name,
-                            beer.tagline,
-                            beer.description,
-                            beer.imageUrl,
-                            beer.abv,
-                            beer.foodPairing
-                        )
-                    }
-                    Observable.fromIterable(beerList)
-                        .map { beer ->
+        }
+            .switchIfEmpty(
+                matchBeerRepository.getMatchBeer(food)
+                    .flatMapMaybe { beerList ->
+                        Log.d("UseCase", "I got ${beerList.size} from API")
+                        val brewBeers = beerList.map { beer ->
                             BrewBeer(
                                 beer.id,
                                 beer.name,
@@ -37,16 +30,33 @@ class GetMatchBeersUseCase(
                                 beer.description,
                                 beer.imageUrl,
                                 beer.abv,
-                                beer.foodPairing
+                                beer.foodPairing,
+                                food
                             )
                         }
-                        .flatMapCompletable { brewBeer ->
-                            matchBeerRepository.insertBrewBeer(brewBeer)
-                        }.andThen(
-                            matchBeerRepository.insertBrewSearch(BrewFood(food))
-                        ).andThen(Maybe.just(brewBeers))
-                }
-        )
+                        Observable.fromIterable(beerList)
+                            .map { beer ->
+                                BrewBeer(
+                                    beer.id,
+                                    beer.name,
+                                    beer.tagline,
+                                    beer.description,
+                                    beer.imageUrl,
+                                    beer.abv,
+                                    beer.foodPairing,
+                                    food
+                                )
+                            }
+                            .flatMapCompletable { brewBeer ->
+                                Log.d("UseCase", "I'm inserting $brewBeer to DB")
+                                Log.d("UseCase", "I'm inserting $food to DB")
+                                matchBeerRepository.insertBrewBeer(brewBeer)
+                            }.andThen(
+                                matchBeerRepository.insertBrewSearch(BrewFood(food))
+                            ).andThen(Maybe.just(brewBeers))
+                    }
+            )
     }
+
 }
 

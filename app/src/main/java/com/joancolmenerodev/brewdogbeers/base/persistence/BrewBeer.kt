@@ -1,7 +1,9 @@
 package com.joancolmenerodev.brewdogbeers.base.persistence
 
 import androidx.annotation.NonNull
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "brewbeer")
 data class BrewBeer(
@@ -11,5 +13,6 @@ data class BrewBeer(
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "image_url") val imageUrl: String?,
     @ColumnInfo(name = "abv") val abv: Double,
-    @ColumnInfo(name = "pairing_food") val pairingFood : List<String>
+    @ColumnInfo(name = "pairing_food") val pairingFood: List<String>,
+    @ColumnInfo(name = "user_search", collate = ColumnInfo.NOCASE) val userSearch: String
 )
