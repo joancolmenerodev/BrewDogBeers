@@ -9,5 +9,5 @@ import retrofit2.http.Query
 interface BrewDogService {
 
     @GET("beers")
-    fun getMatchingBeersByFood(@Query("name") food: String): Single<List<Beer>>
+    fun getMatchingBeersByFood(@Query("food") food: String): Single<List<Beer>>
 }

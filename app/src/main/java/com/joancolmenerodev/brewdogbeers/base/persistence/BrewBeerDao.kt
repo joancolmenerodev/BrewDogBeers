@@ -16,6 +16,6 @@ interface BrewBeerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBrewBeer(brewBeer: BrewBeer) : Completable
 
-    @Query("SELECT * from brewbeer WHERE pairing_food LIKE '%' || :food || '%'")
+    @Query("SELECT * from brewbeer WHERE pairing_food GLOB '*' || :food")
     fun getAllBrewsBeers(food: String): Maybe<List<BrewBeer>>
 }

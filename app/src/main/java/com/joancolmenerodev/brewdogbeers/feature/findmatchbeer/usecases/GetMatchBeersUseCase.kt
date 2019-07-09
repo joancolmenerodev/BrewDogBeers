@@ -16,7 +16,6 @@ class GetMatchBeersUseCase(
             matchBeerRepository.getBeersByFoodLocally(food)
         }.switchIfEmpty(
             matchBeerRepository.getMatchBeer(food)
-                // 1
                 .flatMapMaybe { beerList ->
                     val brewBeers = beerList.map { beer ->
                         BrewBeer(
@@ -30,7 +29,6 @@ class GetMatchBeersUseCase(
                         )
                     }
                     Observable.fromIterable(beerList)
-                        // 2
                         .map { beer ->
                             BrewBeer(
                                 beer.id,
@@ -46,7 +44,6 @@ class GetMatchBeersUseCase(
                             matchBeerRepository.insertBrewBeer(brewBeer)
                         }.andThen(
                             matchBeerRepository.insertBrewSearch(BrewFood(food))
-                            // 3
                         ).andThen(Maybe.just(brewBeers))
                 }
         )
