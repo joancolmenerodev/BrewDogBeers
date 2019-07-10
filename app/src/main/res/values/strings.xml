@@ -3,5 +3,5 @@
     <string name="what_are_you_eatting_hint_text">What are you eatting?</string>
     <string name="title_activity_beer_details">BeerDetails</string>
     <string name="brewdog_beers_text">BrewDog beers</string>
-    <string name="item_beer_abv_percentage">%s \%%</string>
+    <string name="item_beer_abv_percentage">%s %%</string>
 </resources>

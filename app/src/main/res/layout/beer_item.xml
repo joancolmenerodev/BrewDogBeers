@@ -1,20 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                    xmlns:tools="http://schemas.android.com/tools"
                                    android:id="@+id/card_view"
                                    android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
-                                   card_view:cardUseCompatPadding="true"
-                                   card_view:cardCornerRadius="4dp">
+                                   card_view:cardCornerRadius="4dp"
+                                   card_view:cardUseCompatPadding="true">
 
     <LinearLayout
-            android:layout_width="200dp"
-            android:padding="8dp"
-            android:layout_height="wrap_content"
             android:id="@+id/linear_main_beer_item"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-    >
+            android:padding="8dp">
 
 
         <ImageView
@@ -23,64 +23,58 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
-                tools:src="@mipmap/ic_launcher"/>
+                tools:src="@mipmap/ic_launcher" />
 
-        <View android:layout_width="match_parent"
-              android:layout_height="2dp"
-              android:layout_marginTop="8dp"
-              android:background="@color/colorPrimary"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimary" />
 
-        <RelativeLayout
+
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relative_beer_text_parent">
+                android:orientation="horizontal">
 
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/linear_beer_text" android:orientation="vertical">
-                    <TextView
-                            android:id="@+id/tv_beer_item_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginTop="8dp"
-                            tools:text="Arcade Nation"
-                            android:textColor="@android:color/black"
-                            android:textSize="20sp"/>
+            <LinearLayout
+                    android:id="@+id/linear_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/tv_beer_item_tagline"
-                            tools:text="Seasonal Black IPA."
-                    />
-
-                </LinearLayout>
-                <View
-                        android:id="@+id/verticalLine"
-                        android:layout_width="1dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="5dp">
-                </View>
                 <TextView
+                        android:id="@+id/tv_beer_item_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_beer_item_abv"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        tools:text="5.4%" android:layout_marginStart="5dp"/>
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="8dp"
+                        tools:text="What I'm doing wrong?"
+                        android:textColor="@android:color/black"
+                        android:textAppearance="?android:attr/textAppearanceInverse" />
+
+                <TextView
+                        android:id="@+id/tv_beer_item_tagline"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:layout_height="wrap_content"
+                        tools:text="Seasonal Black IPA." />
 
             </LinearLayout>
 
+            <TextView
+                    android:id="@+id/tv_beer_item_abv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:padding="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    tools:text="5.4%" />
 
-
-
-        </RelativeLayout>
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -32,7 +32,7 @@ class BrewBeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         if (brewBeer.imageUrl != null) {
             displayLogo(brewBeer.imageUrl)
         } else {
-            displayLogo("")
+            displayLogo("https://i.imgur.com/2at1XkC.png")
         }
 
         brewBeerCard.setOnClickListener { onItemClick.invoke(brewBeer.id) }
