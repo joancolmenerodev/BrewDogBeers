@@ -61,6 +61,9 @@ dependencies {
     implementation "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
     implementation "org.kodein.di:kodein-di-framework-android-support:$kodeinCoreVersion"
 
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
     //Testing
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"

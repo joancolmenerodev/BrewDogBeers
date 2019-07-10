@@ -41,6 +41,7 @@ ext {
     kodeinVersion = '6.2.1'
     kodeinCoreVersion = '6.2.1'
     roomVersion = '1.1.1'
+    lottieVersion = '2.8.0'
     mockitoCoreVersion = '2.15.0'
     mockitoInlineVersion = '2.13.0'
 }
