@@ -3,7 +3,7 @@ package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.di
 import com.joancolmenerodev.brewdogbeers.base.repository.SharedPreferencesRepository
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter.BeerMatchContract
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter.BeerMatchPresenterImpl
-import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.repository.MatchBeerRepository
+import com.joancolmenerodev.brewdogbeers.base.repository.MatchBeerRepository
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetMatchBeersUseCase
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetSortedOrderUseCase
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetUserSearchFromLocalUseCase
@@ -23,6 +23,11 @@ val matchBeerModule = Kodein.Module("MatchBeerModule"){
     bind<GetSortedOrderUseCase>() with singleton { GetSortedOrderUseCase(instance()) }
 
 
-    bind<MatchBeerRepository>() with singleton { MatchBeerRepository(instance(),instance()) }
+    bind<MatchBeerRepository>() with singleton {
+        MatchBeerRepository(
+            instance(),
+            instance()
+        )
+    }
     bind<SharedPreferencesRepository>() with singleton { SharedPreferencesRepository(instance()) }
 }

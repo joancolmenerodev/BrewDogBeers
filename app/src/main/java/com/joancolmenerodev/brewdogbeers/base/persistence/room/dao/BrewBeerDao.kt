@@ -12,7 +12,7 @@ import io.reactivex.Maybe
 interface BrewBeerDao {
 
     @Query("SELECT * FROM brewbeer WHERE beer_id = :id")
-    fun getBrewBeerById(id: String): Maybe<BrewBeer>
+    fun getBrewBeerById(id: Int): Maybe<BrewBeer>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBrewBeer(brewBeer: BrewBeer) : Completable

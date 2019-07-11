@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.joancolmenerodev.brewdogbeers.R
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
+import com.joancolmenerodev.brewdogbeers.base.utils.Constants.DEFAULT_BEER_IMAGE
 
 class BrewBeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -32,7 +33,7 @@ class BrewBeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         if (brewBeer.imageUrl != null) {
             displayLogo(brewBeer.imageUrl)
         } else {
-            displayLogo("https://i.imgur.com/2at1XkC.png")
+            displayLogo(DEFAULT_BEER_IMAGE)
         }
 
         brewBeerCard.setOnClickListener { onItemClick.invoke(brewBeer.id) }

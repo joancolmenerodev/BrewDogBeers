@@ -2,7 +2,7 @@ package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases
 
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewFood
-import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.repository.MatchBeerRepository
+import com.joancolmenerodev.brewdogbeers.base.repository.MatchBeerRepository
 import io.reactivex.Maybe
 import io.reactivex.Observable
 

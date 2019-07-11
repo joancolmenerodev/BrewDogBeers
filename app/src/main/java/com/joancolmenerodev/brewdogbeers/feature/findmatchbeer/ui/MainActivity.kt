@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
@@ -16,7 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.lottie.utils.LottieValueAnimator
 import com.google.android.material.snackbar.Snackbar
-import com.joancolmenerodev.brewdogbeers.BeerDetails
+import com.joancolmenerodev.brewdogbeers.feature.detailbeer.ui.BeerDetails
 import com.joancolmenerodev.brewdogbeers.R
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.utils.Constants.BEER_ID_KEY

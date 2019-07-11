@@ -4,7 +4,9 @@
     <string name="title_activity_beer_details">BeerDetails</string>
     <string name="brewdog_beers_text">BrewDog beers</string>
     <string name="item_beer_abv_percentage">%s %%</string>
+    <string name="abv_detail_text">ABV: %s %%</string>
     <string name="no_beers_found_text">We couldn\'t find any beer, try adding a different food</string>
     <string name="more_abv_toggle_text">More Abv</string>
     <string name="less_abv_toggle_text">Less Abv</string>
+    <string name="pairing_food_detail_text">Pairing food</string>
 </resources>

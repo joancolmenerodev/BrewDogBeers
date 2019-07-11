@@ -1,4 +1,4 @@
-package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.repository
+package com.joancolmenerodev.brewdogbeers.base.repository
 
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.BrewDatabase
@@ -14,4 +14,5 @@ class MatchBeerRepository(
     fun getBeersByFoodLocally(food: String) = brewDatabase.brewBeersDao().getAllBrewsBeers(food)
     fun insertBrewSearch(brewFood: BrewFood) = brewDatabase.brewDao().insertBrewSearch(brewFood)
     fun insertBrewBeer(brewBeer: BrewBeer) = brewDatabase.brewBeersDao().insertBrewBeer(brewBeer)
+    fun getBrewBeer(brewBeerId: Int) = brewDatabase.brewBeersDao().getBrewBeerById(brewBeerId)
 }

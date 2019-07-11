@@ -11,7 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".BeerDetails"
+                android:name=".feature.detailbeer.ui.BeerDetails"
                 android:label="@string/title_activity_beer_details"
                 android:parentActivityName=".feature.findmatchbeer.ui.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
