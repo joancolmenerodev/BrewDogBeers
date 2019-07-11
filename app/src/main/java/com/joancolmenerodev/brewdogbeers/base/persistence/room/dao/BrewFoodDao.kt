@@ -1,9 +1,10 @@
-package com.joancolmenerodev.brewdogbeers.base.persistence
+package com.joancolmenerodev.brewdogbeers.base.persistence.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewFood
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe

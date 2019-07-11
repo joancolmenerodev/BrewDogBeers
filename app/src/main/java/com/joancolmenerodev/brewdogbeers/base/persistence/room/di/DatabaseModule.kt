@@ -1,7 +1,8 @@
-package com.joancolmenerodev.brewdogbeers.base.persistence
+package com.joancolmenerodev.brewdogbeers.base.persistence.room.di
 
 import androidx.room.Room
 import com.joancolmenerodev.brewdogbeers.base.di.App
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.BrewDatabase
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance

@@ -1,7 +1,7 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases
 
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewFood
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewFood
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.repository.MatchBeerRepository
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -46,7 +46,11 @@ class GetMatchBeersUseCase(
                             .flatMapCompletable { brewBeer ->
                                 matchBeerRepository.insertBrewBeer(brewBeer)
                             }.andThen(
-                                matchBeerRepository.insertBrewSearch(BrewFood(food))
+                                matchBeerRepository.insertBrewSearch(
+                                    BrewFood(
+                                        food
+                                    )
+                                )
                             ).andThen(Maybe.just(brewBeers))
                     }
             )

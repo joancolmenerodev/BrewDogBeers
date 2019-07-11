@@ -1,4 +1,4 @@
-package com.joancolmenerodev.brewdogbeers.base.persistence
+package com.joancolmenerodev.brewdogbeers.base.persistence.room.dto
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

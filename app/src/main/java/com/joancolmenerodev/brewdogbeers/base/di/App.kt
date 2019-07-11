@@ -1,7 +1,8 @@
 package com.joancolmenerodev.brewdogbeers.base.di
 
 import android.app.Application
-import com.joancolmenerodev.brewdogbeers.base.persistence.dataBaseModule
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.di.dataBaseModule
+import com.joancolmenerodev.brewdogbeers.base.persistence.sharedpreferences.di.sharedPreferencesModule
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.di.matchBeerModule
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -20,5 +21,6 @@ class App : Application(), KodeinAware {
         import(matchBeerModule)
         import(contextModule)
         import(dataBaseModule)
+        import(sharedPreferencesModule)
     }
 }

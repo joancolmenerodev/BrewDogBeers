@@ -11,7 +11,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.joancolmenerodev.brewdogbeers.R
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 
 class BrewBeerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

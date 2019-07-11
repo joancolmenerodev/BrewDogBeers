@@ -1,20 +1,36 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter
 
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.ui.AbstractPresenter
+import com.joancolmenerodev.brewdogbeers.base.utils.Constants.SORTING_ABV_KEY
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetMatchBeersUseCase
+import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetSortedOrderUseCase
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.GetUserSearchFromLocalUseCase
+import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.SetSortedOrderUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class BeerMatchPresenterImpl(
     private val getMatchBeersUseCase: GetMatchBeersUseCase,
-    private val getUserSearchFromLocalUseCase: GetUserSearchFromLocalUseCase
+    private val getUserSearchFromLocalUseCase: GetUserSearchFromLocalUseCase,
+    private val getSortedOrderUseCase: GetSortedOrderUseCase,
+    private val setSortedOrderUseCase: SetSortedOrderUseCase
 ) :
     AbstractPresenter<BeerMatchContract.View>(), BeerMatchContract.Presenter {
+    override fun getABVSortByUser(): Boolean {
+        return getSortedOrderUseCase.execute(SORTING_ABV_KEY, false) as Boolean
+    }
+
+    override fun storeASCSorting() {
+        setSortedOrderUseCase.execute(SORTING_ABV_KEY, true)
+    }
+
+    override fun storeDESCSorting() {
+        setSortedOrderUseCase.execute(SORTING_ABV_KEY, false)
+    }
 
 
     override fun findBeerMatchers(food: String) {
-        view?.showProgressBar(true)
         view?.hideKeyboard()
         if (!food.isBlank()) {
             food.replace(" ", "_")
@@ -24,23 +40,21 @@ class BeerMatchPresenterImpl(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    view?.showProgressBar(false)
-                    System.out.println(result)
                     if (result.isEmpty()) {
                         view?.showNoBeersFound()
                     } else {
-                        view?.showBeerList(result)
+                        view?.showBeerList(sortList(result))
                     }
 
                 },
                 { error ->
-                    view?.showProgressBar(false)
                     view?.showError(error.localizedMessage)
                 })
         compositeDisposable.add(disposable!!)
     }
 
-    override fun onBeerClicked(beer: Int) {
+    override fun onBeerClicked(brewBeerId: Int) {
+        view?.navigateToBeerDetail(brewBeerId)
     }
 
     override fun initializeAutoCompleteEditText() {
@@ -50,5 +64,15 @@ class BeerMatchPresenterImpl(
             }
         compositeDisposable.add(disposable)
     }
+
+    private fun sortList(result: List<BrewBeer>): List<BrewBeer> {
+        val sort = getSortedOrderUseCase.execute(SORTING_ABV_KEY, false) as Boolean
+        return if (sort) {
+            result.sortedBy { it.abv }
+        } else {
+            result.sortedByDescending { it.abv }
+        }
+    }
+
 
 }

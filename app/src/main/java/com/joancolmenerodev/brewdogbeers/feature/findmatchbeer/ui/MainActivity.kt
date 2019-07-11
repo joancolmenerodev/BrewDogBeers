@@ -1,16 +1,25 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
+import com.airbnb.lottie.utils.LottieValueAnimator
+import com.google.android.material.snackbar.Snackbar
+import com.joancolmenerodev.brewdogbeers.BeerDetails
 import com.joancolmenerodev.brewdogbeers.R
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
+import com.joancolmenerodev.brewdogbeers.base.utils.Constants.BEER_ID_KEY
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter.BeerMatchContract
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.ui.adapter.BrewBeerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,6 +30,7 @@ import org.kodein.di.generic.instance
 
 
 class MainActivity : AppCompatActivity(), BeerMatchContract.View, KodeinAware {
+
 
     override val kodein by kodein()
     private val presenter: BeerMatchContract.Presenter by instance()
@@ -47,14 +57,17 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View, KodeinAware {
         gridLayoutManager = GridLayoutManager(this, 2)
     }
 
-    override fun showBeerList(beersList: List<BrewBeer>) {
+    private fun initRecyclerViewAdapter(beersList: List<BrewBeer>) {
         adapter = BrewBeerAdapter(beersList)
         rv_brewbeer.adapter = adapter
         rv_brewbeer.layoutManager = gridLayoutManager
+        createAnimationForRecyclerView()
         adapter.let {
             it.onItemClick = { brewBeerId -> presenter.onBeerClicked(brewBeerId) }
         }
+    }
 
+    private fun createAnimationForRecyclerView() {
         val animation = ScaleAnimation(
             0F, 1F, 0F, 1F, Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
@@ -64,12 +77,36 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View, KodeinAware {
         rv_brewbeer.animate()
     }
 
+    override fun showBeerList(beersList: List<BrewBeer>) {
+        linear_no_beer_found.visibility = View.GONE
+        rv_brewbeer.visibility = View.VISIBLE
+        initRecyclerViewAdapter(beersList)
+
+    }
+
     override fun showNoBeersFound() {
-        System.out.println("No beers found")
+        rv_brewbeer.visibility = View.GONE
+        linear_no_beer_found.visibility = View.VISIBLE
+        lav_no_beer_found.playAnimation()
+        lav_no_beer_found.repeatCount = LottieValueAnimator.INFINITE
     }
 
     override fun showError(errorMessage: String?) {
-        System.out.println(errorMessage)
+        errorMessage?.let {
+            Snackbar.make(findViewById(android.R.id.content), errorMessage, Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun navigateToBeerDetail(brewBeerId: Int) {
+        val intent = Intent(
+            this@MainActivity,
+            BeerDetails::class.java
+        )
+        val bundle = Bundle().also {
+            it.putInt(BEER_ID_KEY, brewBeerId)
+        }
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
     override fun hideKeyboard() {
@@ -82,9 +119,6 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View, KodeinAware {
         et_food.setAdapter(adapter)
     }
 
-    override fun showProgressBar(b: Boolean) {
-    }
-
     override fun onResume() {
         super.onResume()
         presenter.attachView(this)
@@ -94,5 +128,33 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View, KodeinAware {
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.sorting_abv, menu)
+        val toggleButton =  menu?.findItem(R.id.sort_abv)?.actionView?.findViewById(R.id.abv_switch) as ToggleButton
+        toggleButton.isChecked = presenter.getABVSortByUser()
+        toggleButton.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                presenter.storeDESCSorting()
+                updateList(false)
+            }
+            else{
+                presenter.storeASCSorting()
+                updateList(true)
+
+            }
+        }
+        return true
+    }
+
+    private fun updateList(sort: Boolean){
+        if(sort){
+            initRecyclerViewAdapter(adapter.getList().sortedByDescending { it.abv })
+        }
+        else{
+            initRecyclerViewAdapter(adapter.getList().sortedBy { it.abv })
+        }
     }
 }

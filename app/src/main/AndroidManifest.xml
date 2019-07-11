@@ -20,6 +20,7 @@
                     android:value="com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.ui.MainActivity"/>
         </activity>
         <activity android:name=".feature.findmatchbeer.ui.MainActivity"
+                  android:windowSoftInputMode="adjustPan|adjustResize"
                   android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

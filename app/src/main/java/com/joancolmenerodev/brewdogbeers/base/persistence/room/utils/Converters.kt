@@ -1,4 +1,4 @@
-package com.joancolmenerodev.brewdogbeers.base.persistence
+package com.joancolmenerodev.brewdogbeers.base.persistence.room.utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

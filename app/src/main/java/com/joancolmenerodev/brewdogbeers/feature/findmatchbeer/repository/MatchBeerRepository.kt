@@ -1,8 +1,8 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.repository
 
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewDatabase
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewFood
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.BrewDatabase
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewFood
 import com.joancolmenerodev.brewdogbeers.service.BrewDogService
 
 class MatchBeerRepository(

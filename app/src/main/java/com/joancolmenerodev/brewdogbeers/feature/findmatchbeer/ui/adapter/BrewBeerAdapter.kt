@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.joancolmenerodev.brewdogbeers.R
-import com.joancolmenerodev.brewdogbeers.base.persistence.BrewBeer
+import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 
 class BrewBeerAdapter(private val brewBeerList: List<BrewBeer>): RecyclerView.Adapter<BrewBeerViewHolder>() {
 
@@ -25,5 +25,6 @@ class BrewBeerAdapter(private val brewBeerList: List<BrewBeer>): RecyclerView.Ad
         holder.bind(brewBeerList[position], onItemClick)
     }
 
+    fun getList() = brewBeerList
 
 }
