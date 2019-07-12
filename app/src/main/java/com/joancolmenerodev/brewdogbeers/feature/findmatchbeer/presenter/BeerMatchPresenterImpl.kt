@@ -1,5 +1,6 @@
 package com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter
 
+import android.util.Log
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.ui.AbstractPresenter
 import com.joancolmenerodev.brewdogbeers.base.utils.Constants.SORTING_ABV_KEY
@@ -23,10 +24,12 @@ class BeerMatchPresenterImpl(
 
     override fun storeASCSorting() {
         setSortedOrderUseCase.execute(SORTING_ABV_KEY, true)
+        Log.d("EXAMPLE","El poso a true")
     }
 
     override fun storeDESCSorting() {
         setSortedOrderUseCase.execute(SORTING_ABV_KEY, false)
+        Log.d("EXAMPLE","El poso a false")
     }
 
 

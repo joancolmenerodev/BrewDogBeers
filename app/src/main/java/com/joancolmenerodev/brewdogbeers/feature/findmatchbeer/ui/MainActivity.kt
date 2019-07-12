@@ -15,10 +15,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.lottie.utils.LottieValueAnimator
 import com.google.android.material.snackbar.Snackbar
-import com.joancolmenerodev.brewdogbeers.feature.detailbeer.ui.BeerDetails
 import com.joancolmenerodev.brewdogbeers.R
 import com.joancolmenerodev.brewdogbeers.base.persistence.room.dto.BrewBeer
 import com.joancolmenerodev.brewdogbeers.base.utils.Constants.BEER_ID_KEY
+import com.joancolmenerodev.brewdogbeers.feature.detailbeer.ui.BeerDetails
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.presenter.BeerMatchContract
 import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.ui.adapter.BrewBeerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -136,24 +136,22 @@ class MainActivity : AppCompatActivity(), BeerMatchContract.View, KodeinAware {
         toggleButton.isChecked = presenter.getABVSortByUser()
         toggleButton.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
-                presenter.storeDESCSorting()
-                updateList(false)
+                presenter.storeASCSorting()
             }
             else{
-                presenter.storeASCSorting()
-                updateList(true)
-
+                presenter.storeDESCSorting()
             }
+            updateList(isChecked)
         }
         return true
     }
 
     private fun updateList(sort: Boolean){
         if(sort){
-            initRecyclerViewAdapter(adapter.getList().sortedByDescending { it.abv })
+            initRecyclerViewAdapter(adapter.getList().sortedBy { it.abv })
         }
         else{
-            initRecyclerViewAdapter(adapter.getList().sortedBy { it.abv })
+            initRecyclerViewAdapter(adapter.getList().sortedByDescending { it.abv })
         }
     }
 }
