@@ -42,11 +42,12 @@ ext {
     kodeinCoreVersion = '6.2.1'
     roomVersion = '1.1.1'
     lottieVersion = '2.8.0'
-    mockitoCoreVersion = '2.15.0'
-    mockitoInlineVersion = '2.13.0'
+    mockitoCoreVersion = '2.22.0'
+    mockitoInlineVersion = '2.22.0'
 }
 
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

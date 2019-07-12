@@ -9,14 +9,14 @@ import com.joancolmenerodev.brewdogbeers.feature.findmatchbeer.usecases.SetSorte
 import com.joancolmenerodev.brewdogbeers.utils.RxImmediateSchedulerRule
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.*
+import org.mockito.Mockito.never
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class BeerMatchPresenterImplTest {
