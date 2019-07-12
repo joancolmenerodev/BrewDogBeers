@@ -9,4 +9,6 @@
     <string name="more_abv_toggle_text">More Abv</string>
     <string name="less_abv_toggle_text">Less Abv</string>
     <string name="pairing_food_detail_text">Pairing food</string>
+    <string name="description_detail_text">Description</string>
+    <string name="alcohol_by_volume_description_text">Alcohol by volume</string>
 </resources>
