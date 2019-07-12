@@ -1,6 +1,5 @@
-# BrewDogBeers
+# BrewDogBeers [![CircleCI](https://circleci.com/gh/joancolmenerodev/BrewDogBeers.svg?style=svg&circle-token=54a5b4463aa55c39b62a519c1e18ace0a6949939)](https://circleci.com/gh/joancolmenerodev/BrewDogBeers)
 
-[![CircleCI](https://circleci.com/gh/joancolmenerodev/BrewDogBeers.svg?style=svg&circle-token=54a5b4463aa55c39b62a519c1e18ace0a6949939)](https://circleci.com/gh/joancolmenerodev/BrewDogBeers)
 An app that recomends to you some beers depending of what you are eating.
 
 Libraries used
